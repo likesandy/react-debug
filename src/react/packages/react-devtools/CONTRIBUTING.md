@@ -69,7 +69,7 @@ Core DevTools functionality is typically unit tested (see [here](https://github.
 ```sh
 yarn test-build-devtools
 ```
-You can connect tests to a debugger as well if you'd like by running:
+You can connect tests to a  as well if you'd like by running:
 ```sh
 yarn debug-test-build-devtools
 ```

@@ -60,7 +60,7 @@ function testStringCoercion(value: mixed) {
   // To fix the problem, coerce this object or symbol value to a string before
   // passing it to React. The most reliable way is usually `String(value)`.
   //
-  // To find which value is throwing, check the browser or debugger console.
+  // To find which value is throwing, check the browser or  console.
   // Before this exception was thrown, there should be `console.error` output
   // that shows the type (Symbol, Temporal.PlainDate, etc.) that caused the
   // problem and how that type was used: key, atrribute, input value prop, etc.

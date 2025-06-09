@@ -348,11 +348,11 @@ export function patch({
 
           if (consoleSettingsRef.breakOnConsoleErrors) {
             // --- Welcome to debugging with React DevTools ---
-            // This debugger statement means that you've enabled the "break on warnings" feature.
+            // This  statement means that you've enabled the "break on warnings" feature.
             // Use the browser's Call Stack panel to step out of this override function-
             // to where the original warning or error was logged.
-            // eslint-disable-next-line no-debugger
-            debugger;
+            // eslint-disable-next-line no-
+            ;
           }
 
           originalMethod(...args);

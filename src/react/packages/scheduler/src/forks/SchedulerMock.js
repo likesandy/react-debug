@@ -148,7 +148,7 @@ function handleTimeout(currentTime: number) {
 }
 
 function flushWork(hasTimeRemaining: boolean, initialTime: number) {
-  debugger
+  
   if (enableProfiling) {
     markSchedulerUnsuspended(initialTime);
   }
