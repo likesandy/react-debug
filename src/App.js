@@ -1,67 +1,37 @@
-import React, { createContext, useContext, useState } from 'react'
-import './App.css'
+import React, { useState, useMemo } from 'react'
 
-// 创建主题上下文
-const ThemeContext = createContext()
+export default function App() {
+  const [count, setCount] = useState(0)
+  const [otherState, setOtherState] = useState(0)
 
-// 主题提供者组件
-function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('light')
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
-  }
-
-  return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>
-}
-
-// 自定义hooks
-function useTheme() {
-  const context = useContext(ThemeContext)
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider')
-  }
-  return context
-}
-
-// 头部组件
-function Header() {
-  const { theme, toggleTheme } = useTheme()
+  // 使用 useMemo 缓存计算结果
+  // 只有当 count 改变时才会重新计算
+  const expensiveValue = useMemo(() => {
+    console.log('正在计算昂贵的值...')
+    return count * count
+  }, [count])
 
   return (
-    <header className={`header ${theme}`}>
-      <h1>useContext 调试案例</h1>
-      <div className="controls">
-        <button onClick={toggleTheme}>
-          切换到 {theme === 'light' ? '暗色' : '亮色'} 主题
+    <div style={{ padding: '20px' }}>
+      <h1>useMemo 简单示例</h1>
+
+      <div>
+        <p>计数: {count}</p>
+        <p>计算结果 (count²): {expensiveValue}</p>
+        <button onClick={() => setCount(count + 1)}>增加计数</button>
+      </div>
+
+      <div style={{ marginTop: '20px' }}>
+        <p>其他状态: {otherState}</p>
+        <button onClick={() => setOtherState(otherState + 1)}>
+          增加其他状态
         </button>
       </div>
-    </header>
-  )
-}
 
-// 内容组件
-function Content() {
-  const { theme } = useTheme()
-
-  return (
-    <main className={`content ${theme}`}>
-      <h2>当前状态调试</h2>
-      <div className="debug-info">
-        <p>
-          <strong>主题:</strong> {theme}
-        </p>
-      </div>
-    </main>
-  )
-}
-
-// 主应用组件
-export default function App() {
-  return (
-    <ThemeProvider>
-      <Header />
-      <Content />
-    </ThemeProvider>
+      <p style={{ marginTop: '20px', fontSize: '14px', color: '#666' }}>
+        打开控制台查看：只有点击"增加计数"时才会重新计算，
+        点击"增加其他状态"不会触发重新计算
+      </p>
+    </div>
   )
 }

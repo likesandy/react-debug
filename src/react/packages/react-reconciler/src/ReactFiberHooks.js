@@ -2798,6 +2798,7 @@ function mountMemo<T>(
     nextCreate()
     setIsStrictModeForDevtools(false)
   }
+  // 保存数据
   hook.memoizedState = [nextValue, nextDeps]
   return nextValue
 }
@@ -2811,6 +2812,7 @@ function updateMemo<T>(
   const prevState = hook.memoizedState
   // Assume these are defined. If they're not, areHookInputsEqual will warn.
   if (nextDeps !== null) {
+    //* deps对比
     const prevDeps: Array<mixed> | null = prevState[1]
     if (areHookInputsEqual(nextDeps, prevDeps)) {
       return prevState[0]
