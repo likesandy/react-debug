@@ -725,6 +725,7 @@ function readContextForConsumer<T>(
   consumer: Fiber | null,
   context: ReactContext<T>
 ): T {
+  // * 获取 context 的值
   const value = isPrimaryRenderer
     ? context._currentValue
     : context._currentValue2
@@ -738,6 +739,7 @@ function readContextForConsumer<T>(
       next: null
     }
 
+    // * 多个 context 形成链表
     if (lastContextDependency === null) {
       if (consumer === null) {
         throw new Error(
@@ -750,6 +752,7 @@ function readContextForConsumer<T>(
 
       // This is the first dependency for this component. Create a new list.
       lastContextDependency = contextItem
+      // * 添加到 fiber.dependencies
       consumer.dependencies = {
         lanes: NoLanes,
         firstContext: contextItem
@@ -762,5 +765,6 @@ function readContextForConsumer<T>(
       lastContextDependency = lastContextDependency.next = contextItem
     }
   }
+  // * 返回 context 的值
   return value
 }

@@ -3381,6 +3381,7 @@ function updateContextProvider(
     }
   }
 
+  // * 添加到 fiber.dependencies
   pushProvider(workInProgress, context, newValue)
 
   if (enableLazyContextPropagation) {
